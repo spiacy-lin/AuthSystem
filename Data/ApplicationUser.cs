@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using AuthSystem.Models;
 
-namespace AuthSystem.Areas.Identity.Data
+namespace AuthSystem.Data
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
@@ -16,6 +18,5 @@ namespace AuthSystem.Areas.Identity.Data
         [PersonalData]
         [Column(TypeName = "nvarchar(100)")]
         public string LastName { get; set; }
-
     }
 }

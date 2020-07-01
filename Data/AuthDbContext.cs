@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AuthSystem.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
+﻿using AuthSystem.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +6,8 @@ namespace AuthSystem.Data
 {
     public class AuthDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Guest> Guest { get; set; }
+
         public AuthDbContext(DbContextOptions<AuthDbContext> options)
             : base(options)
         {

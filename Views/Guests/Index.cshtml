@@ -1,0 +1,74 @@
+﻿@model IEnumerable<AuthSystem.Models.Guest>
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<ApplicationUser> UserManager
+@inject AuthDbContext Context
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentText)
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                E-mail
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var user = Context.Users.FirstOrDefault(x => x.Id == item.ApplicationUserId);
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.Email)
+                </td>
+                <td>
+                    @if (UserManager.GetUserId(User) == user.Id)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><text>|</text>
+                    }
+
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+
+                    @if (UserManager.GetUserId(User) == user.Id)
+                    {
+                        <text>|</text><a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

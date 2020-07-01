@@ -27,8 +27,8 @@ namespace AuthSystem
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddDbContext<AuthSystemContext>(options =>
-          options.UseSqlServer(Configuration.GetConnectionString("AuthSystemContext")));
+            services.AddDbContext<AuthDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("AuthDbContextConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
