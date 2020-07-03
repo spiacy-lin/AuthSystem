@@ -28,6 +28,7 @@ namespace AuthSystem.Controllers
         public async Task<IActionResult> Index()
         {
             var list = await _context.Guest.ToListAsync();
+            list.Reverse();
             return View(list);
         }
 
